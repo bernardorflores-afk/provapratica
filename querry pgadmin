@@ -1,0 +1,46 @@
+create table aeronaves( 
+id serial primary key
+capacidade int varchar(150) unique not null;
+modelos varchar(150) not null;
+codigo_cauda VARCHAR(10) unique not null;
+);
+
+create table pilotos(
+id serial primary key;
+nome varchar(150)not null;
+codigo_anac varchar(6) unique not null;
+horas_voo int not null;
+
+);
+
+crate table voos(
+id serial primary key; 
+aeronave_id ref(aeronaves.id) foreign key;
+pilotos_id ref(pilotos.id) foreign key;
+numero_voo varchar(150) not null;
+origem varchar(150) not null;
+destino varchar(150) not null;
+data_hora TIMESTAMP default not null;
+status text( 'agendado'; 'em voo'; 'concluido'; 'cancelado') default('agendado')
+
+);
+
+create table passageiros(
+id serial primary key;
+nome varchar(150) unique not null;
+cpf varchar(11) unique not null;
+email varchar(150) unique not null;
+
+);
+
+create table passagens(
+id serial primary key;
+voo_id ref(voos.id) foreign key; 
+passageiros_id ref(passageiros.id) foreign key;
+assento VARCHAR(4) not null;
+classe text ( 'economica' ; 'executiva') default('economica');
+valor decimal(10>0) not null;
+
+);
+
+
